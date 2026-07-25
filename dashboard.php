@@ -19,7 +19,7 @@ if(!isset($_SESSION['user_id']))
 
 <title>Customer Dashboard - VendorHub</title>
 
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="css/dashboard.css">
 
 </head>
 
