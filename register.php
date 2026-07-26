@@ -1,138 +1,292 @@
 <?php
 
-include "config.php";
+require_once "database/db.php";
+require_once "includes/session.php";
 
+$message = "";
 
-if(isset($_POST['register']))
-{
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+    $name =
+        trim($_POST['name']);
 
+    $email =
+        trim($_POST['email']);
 
+    $phone =
+        trim($_POST['phone']);
 
-    $sql = "INSERT INTO users
-            (name,email,phone,password,role,status)
+    $password =
+        $_POST['password'];
 
-            VALUES
+    $role =
+        $_POST['role'];
 
-            ('$name',
-             '$email',
-             '$phone',
-             '$password',
-             '$role',
-             'active')";
+    $checkSql = "
+        SELECT user_id
+        FROM users
+        WHERE email = ?
+    ";
 
+    $checkStmt =
+        mysqli_prepare(
+            $conn,
+            $checkSql
+        );
 
+    mysqli_stmt_bind_param(
+        $checkStmt,
+        "s",
+        $email
+    );
 
-    if(mysqli_query($conn,$sql))
-    {
+    mysqli_stmt_execute(
+        $checkStmt
+    );
 
-        echo "
-        <script>
-        alert('Registration successful');
-        window.location='index.php';
-        </script>
+    mysqli_stmt_store_result(
+        $checkStmt
+    );
+
+    if (
+        mysqli_stmt_num_rows(
+            $checkStmt
+        ) > 0
+    ) {
+
+        $message =
+            "Email already exists.";
+
+    } else {
+
+        $hashedPassword =
+            password_hash(
+                $password,
+                PASSWORD_DEFAULT
+            );
+
+        $sql = "
+            INSERT INTO users
+            (
+                name,
+                email,
+                phone,
+                password,
+                role,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, 'active')
         ";
 
+        $stmt =
+            mysqli_prepare(
+                $conn,
+                $sql
+            );
+
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sssss",
+            $name,
+            $email,
+            $phone,
+            $hashedPassword,
+            $role
+        );
+
+        if (
+            mysqli_stmt_execute(
+                $stmt
+            )
+        ) {
+
+            header(
+                "Location: login.php"
+            );
+
+            exit();
+
+        } else {
+
+            $message =
+                "Registration failed.";
+
+        }
+
+        mysqli_stmt_close($stmt);
     }
 
-    else
-    {
-
-        echo "Error: ".mysqli_error($conn);
-
-    }
-
+    mysqli_stmt_close($checkStmt);
 }
-
 
 ?>
 
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Register VendorHub</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - VendorHub</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/login.css">
 
 </head>
 
-
 <body>
 
+<div class="auth-page">
 
-<div class="popup-content">
+    <div class="auth-container">
 
+        <div class="auth-logo">
 
-<h2>Create Account</h2>
+            Vendor<span>Hub</span>
 
+        </div>
 
-<form method="POST">
+        <h2 class="auth-title">
 
+            Create Account
 
-<label>Name</label>
+        </h2>
 
-<input type="text" name="name" required>
+        <?php if (!empty($message)): ?>
 
+            <div class="error-message">
 
+                <?= htmlspecialchars($message) ?>
 
-<label>Email</label>
+            </div>
 
-<input type="email" name="email" required>
+        <?php endif; ?>
 
+        <form method="POST"
+              action="register.php">
 
+            <div class="form-group">
 
-<label>Phone</label>
+                <label for="name">
 
-<input type="text" name="phone" required>
+                    Full Name
 
+                </label>
 
+                <input type="text"
+                       id="name"
+                       name="name"
+                       class="form-control"
+                       required>
 
-<label>Password</label>
+            </div>
 
-<input type="password" name="password" required>
+            <div class="form-group">
 
+                <label for="email">
 
+                    Email
 
-<label>Register As</label>
+                </label>
 
+                <input type="email"
+                       id="email"
+                       name="email"
+                       class="form-control"
+                       required>
 
-<select name="role">
+            </div>
 
+            <div class="form-group">
 
-<option value="customer">
-Customer
-</option>
+                <label for="phone">
 
+                    Phone
 
-<option value="vendor">
-Vendor
-</option>
+                </label>
 
+                <input type="text"
+                       id="phone"
+                       name="phone"
+                       class="form-control">
 
-</select>
+            </div>
 
+            <div class="form-group">
 
-<br><br>
+                <label for="password">
 
+                    Password
 
-<button type="submit" name="register">
-Register
-</button>
+                </label>
 
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control"
+                       required>
 
-</form>
+            </div>
 
+            <div class="form-group">
+                <label for="role">
+
+                    Register As
+
+                </label>
+
+                <select id="role"
+                        name="role"
+                        class="form-control"
+                        required>
+
+                    <option value="customer">
+
+                        Customer
+
+                    </option>
+
+                    <option value="vendor">
+
+                        Vendor
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary full-width">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            Already have an account?
+
+            <a href="login.php">
+
+                Login here
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
-
 
 </body>
 
