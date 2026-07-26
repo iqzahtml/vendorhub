@@ -1,9 +1,9 @@
-/* =========================
-   LOGIN PAGE
-========================= */
-
 .auth-page {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
     background:
         linear-gradient(
             135deg,
@@ -11,40 +11,58 @@
             #dbeafe,
             #e0f2fe
         );
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .auth-container {
     width: 420px;
-    background: var(--white);
+    max-width: 100%;
+    background: #ffffff;
     padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(30, 64, 175, 0.15);
+    border-radius: 18px;
+    box-shadow:
+        0 20px 50px
+        rgba(30, 64, 175, 0.15);
 }
 
 .auth-logo {
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--primary-blue);
+    font-size: 30px;
+    font-weight: 700;
+    color: #1d4ed8;
     margin-bottom: 25px;
+}
+
+.auth-logo span {
+    color: #38bdf8;
 }
 
 .auth-title {
     text-align: center;
+    color: #0f172a;
     margin-bottom: 25px;
+}
+
+.error-message {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.full-width {
+    width: 100%;
 }
 
 .auth-footer {
     text-align: center;
     margin-top: 20px;
-    color: var(--grey);
+    color: #64748b;
     font-size: 14px;
 }
 
 .auth-footer a {
-    color: var(--primary-blue);
+    color: #1d4ed8;
     font-weight: 600;
 }
