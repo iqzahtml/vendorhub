@@ -123,6 +123,6 @@ $currentPage = basename(
 
 <?php if (!isset($_SESSION['user_id'])): ?>
 
-    <?php include DIR . "/login_modal.php"; ?>
+    <?php include __DIR__ . "/login_modal.php"; ?>
 
 <?php endif; ?>
