@@ -1,162 +1,662 @@
 <?php
 
-session_start();
-
-
-if(!isset($_SESSION['user_id']))
-{
-    header("Location: ../index.php");
-}
-
+require_once "includes/header.php";
 
 ?>
 
+<?php include "includes/navbar.php"; ?>
 
-<!DOCTYPE html>
-<html>
+<?php
 
+/*
+|--------------------------------------------------------------------------
+| SINGLE VENDOR PAGE
+|--------------------------------------------------------------------------
+*/
 
-<head>
+if (
+    isset($_GET['id']) &&
+    is_numeric($_GET['id'])
+) {
 
-<title>
-Vendor Dashboard - VendorHub
-</title>
+    $vendor_id = intval(
+        $_GET['id']
+    );
 
+    /*
+    |--------------------------------------------------------------------------
+    | GET VENDOR
+    |--------------------------------------------------------------------------
+    */
 
-<link rel="stylesheet" href="../css/style.css">
+    $vendorSql = "
 
+        SELECT
 
-</head>
+            v.vendor_id,
+            v.business_name,
+            v.business_address,
+            v.category,
+            v.delivery_method,
+            v.approval_status
 
+        FROM vendors v
 
-<body>
+        WHERE v.vendor_id = ?
 
+        AND v.approval_status = 'Approved'
 
+        LIMIT 1
 
-<header>
+    ";
 
+    $vendorStmt = mysqli_prepare(
+        $conn,
+        $vendorSql
+    );
 
-<div class="logo">
-VendorHub Seller
-</div>
+    mysqli_stmt_bind_param(
+        $vendorStmt,
+        "i",
+        $vendor_id
+    );
 
+    mysqli_stmt_execute(
+        $vendorStmt
+    );
 
-<nav>
+    $vendorResult =
+        mysqli_stmt_get_result(
+            $vendorStmt
+        );
 
-<a href="dashboard.php">
-Dashboard
-</a>
+    if (
+        mysqli_num_rows(
+            $vendorResult
+        ) === 0
+    ) {
 
+        header(
+            "Location: vendor.php"
+        );
 
-<a href="add_product.php">
-Add Product
-</a>
+        exit();
 
+    }
 
-<a href="manage_delivery.php">
-Delivery
-</a>
+    $vendor =
+        mysqli_fetch_assoc(
+            $vendorResult
+        );
 
+    /*
+    |--------------------------------------------------------------------------
+    | GET VENDOR PRODUCTS
+    |--------------------------------------------------------------------------
+    */
 
-<a href="../logout.php">
-Logout
-</a>
+    $productSql = "
 
+        SELECT
 
-</nav>
+            p.product_id,
+            p.product_name,
+            p.description,
+            p.price,
+            p.stock_quantity,
+            p.image,
 
+            c.category_name
 
-</header>
+        FROM products p
 
+        INNER JOIN categories c
 
+            ON p.category_id =
+            c.category_id
 
-<section class="hero">
+        WHERE p.vendor_id = ?
 
+        ORDER BY p.product_id DESC
 
-<div class="hero-text">
+    ";
 
+    $productStmt = mysqli_prepare(
+        $conn,
+        $productSql
+    );
 
-<h1>
+    mysqli_stmt_bind_param(
+        $productStmt,
+        "i",
+        $vendor_id
+    );
 
-Welcome Vendor
-<?php echo $_SESSION['name']; ?>
+    mysqli_stmt_execute(
+        $productStmt
+    );
 
-</h1>
+    $productResult =
+        mysqli_stmt_get_result(
+            $productStmt
+        );
 
+    ?>
 
-<p>
-Manage your products and delivery method.
-</p>
+    <main class="vendor-page">
 
+        <section class="vendor-profile-header">
 
+            <div class="vendor-profile-icon">
 
-</div>
+                🏪
 
+            </div>
 
-</section>
+            <div>
 
+                <h1>
 
+                    <?= htmlspecialchars(
+                        $vendor[
+                            'business_name'
+                        ]
+                    ) ?>
 
-<section class="category">
+                </h1>
 
+                <?php if (
+                    !empty(
+                        $vendor[
+                            'business_address'
+                        ]
+                    )
+                ): ?>
 
-<h2>
-Vendor Menu
-</h2>
+                    <p>
 
+                        📍
 
+                        <?= nl2br(
+                            htmlspecialchars(
+                                $vendor[
+                                    'business_address'
+                                ]
+                            )
+                        ) ?>
 
-<div class="category-box">
+                    </p>
 
+                <?php endif; ?>
 
-<div>
+                <p>
 
-<h3>
-Add Product
-</h3>
+                    🚚 Delivery Method:
 
-<p>
-Upload your product
-</p>
+                    <?= htmlspecialchars(
+                        $vendor[
+                            'delivery_method'
+                        ]
+                    ) ?>
 
+                </p>
 
-<a href="add_product.php">
-Open
-</a>
+            </div>
 
+        </section>
 
-</div>
+        <section class="vendor-products-section">
 
+            <div class="section-title">
 
+                <h2>
 
-<div>
+                    Products from this Vendor
 
-<h3>
-Manage Delivery
-</h3>
+                </h2>
 
-<p>
-Set Pickup/Postage
-</p>
+                <p>
 
+                    Browse products sold by
 
-<a href="manage_delivery.php">
-Open
-</a>
+                    <?= htmlspecialchars(
+                        $vendor[
+                            'business_name'
+                        ]
+                        ) ?>
 
+                </p>
 
-</div>
+            </div>
 
+            <?php if (
+                mysqli_num_rows(
+                    $productResult
+                ) > 0
+            ): ?>
 
+                <div class="product-grid">
 
-</div>
+                    <?php while (
+                        $product =
+                        mysqli_fetch_assoc(
+                            $productResult
+                        )
+                    ): ?>
 
+                        <div class="product-card">
 
-</section>
+                            <div class="product-image">
 
+                                <?php if (
+                                    !empty(
+                                        $product[
+                                            'image'
+                                        ]
+                                    )
+                                ): ?>
 
+                                    <img
+                                        src="uploads/products/<?= htmlspecialchars(
+                                            $product[
+                                                'image'
+                                            ]
+                                        ) ?>"
+                                        alt="<?= htmlspecialchars(
+                                            $product[
+                                                'product_name'
+                                            ]
+                                        ) ?>"
+                                    >
 
-</body>
+                                <?php else: ?>
 
+                                    <div class="no-image">
 
-</html>
+                                        🛍️
+
+                                    </div>
+
+                                <?php endif; ?>
+
+                            </div>
+
+                            <div class="product-info">
+
+                                <span
+                                    class="product-category"
+                                >
+
+                                    <?= htmlspecialchars(
+                                        $product[
+                                            'category_name'
+                                        ]
+                                    ) ?>
+
+                                </span>
+
+                                <h3>
+
+                                    <?= htmlspecialchars(
+                                        $product[
+                                            'product_name'
+                                        ]
+                                    ) ?>
+
+                                </h3>
+
+                                <p
+                                    class="product-description"
+                                >
+
+                                    <?= htmlspecialchars(
+                                        substr(
+                                            $product[
+                                                'description'
+                                            ],
+                                            0,
+                                            100
+                                        )
+                                    ) ?>
+
+                                </p>
+
+                                <div
+                                    class="product-bottom"
+                                >
+
+                                    <span
+                                        class="product-price"
+                                    >
+
+                                        RM
+                                        <?= number_format(
+                                            $product[
+                                                'price'
+                                            ],
+                                            2
+                                        ) ?>
+
+                                    </span>
+
+                                    <?php if (
+                                        $product[
+                                            'stock_quantity'
+                                            ] > 0
+                                    ): ?>
+
+                                        <span
+                                            class="stock available"
+                                        >
+
+                                            In Stock
+
+                                        </span>
+
+                                    <?php else: ?>
+
+                                        <span
+                                            class="stock unavailable"
+                                        >
+
+                                            Out of Stock
+
+                                        </span>
+
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <a
+                                    href="product_details.php?id=<?= $product[
+                                        'product_id'
+                                    ] ?>"
+                                    class="btn btn-primary product-button"
+                                >
+
+                                    View Details
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <?php endwhile; ?>
+
+                </div>
+
+            <?php else: ?>
+
+                <div class="empty-products">
+
+                    <div class="empty-icon">
+
+                        📦
+
+                    </div>
+
+                    <h3>
+
+                        No Products Available
+
+                    </h3>
+
+                    <p>
+
+                        This vendor has not added
+                        any products yet.
+
+                    </p>
+
+                </div>
+
+            <?php endif; ?>
+
+        </section>
+
+    </main>
+
+<?php
+
+} else {
+
+    /*
+    |--------------------------------------------------------------------------
+    | ALL VENDORS PAGE
+    |--------------------------------------------------------------------------
+    */
+
+    $vendorSql = "
+
+        SELECT
+
+            v.vendor_id,
+            v.business_name,
+            v.business_address,
+            v.category,
+            v.delivery_method,
+
+            COUNT(
+                p.product_id
+            ) AS total_products
+
+        FROM vendors v
+
+        LEFT JOIN products p
+
+            ON v.vendor_id =
+            p.vendor_id
+
+        WHERE v.approval_status =
+            'Approved'
+
+        GROUP BY
+
+            v.vendor_id,
+            v.business_name,
+            v.business_address,
+            v.category,
+            v.delivery_method
+
+        ORDER BY
+
+            v.business_name ASC
+
+    ";
+
+    $vendorResult = mysqli_query(
+        $conn,
+        $vendorSql
+    );
+
+    ?>
+
+    <main class="vendor-page">
+
+        <section class="page-header">
+
+            <div class="page-header-content">
+
+                <h1>
+
+                    Our Vendors
+
+                </h1>
+
+                <p>
+
+                    Discover businesses and products
+                    available on VendorHub.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="vendor-section">
+
+            <?php if (
+                mysqli_num_rows(
+                    $vendorResult
+                ) > 0
+            ): ?>
+
+                <div class="vendor-grid">
+
+                    <?php while (
+                        $vendor =
+                        mysqli_fetch_assoc(
+                            $vendorResult
+                        )
+                    ): ?>
+
+                        <div class="vendor-card">
+
+                            <div
+                                class="vendor-card-icon"
+                            >
+
+                                🏪
+
+                            </div>
+
+                            <h2>
+
+                                <?= htmlspecialchars(
+                                    $vendor[
+                                        'business_name'
+                                    ]
+                                ) ?>
+
+                            </h2>
+                            <?php if (
+                                !empty(
+                                    $vendor[
+                                        'category'
+                                    ]
+                                )
+                            ): ?>
+
+                                <span
+                                    class="vendor-category"
+                                >
+
+                                    <?= htmlspecialchars(
+                                        $vendor[
+                                            'category'
+                                        ]
+                                    ) ?>
+
+                                </span>
+
+                            <?php endif; ?>
+
+                            <?php if (
+                                !empty(
+                                    $vendor[
+                                        'business_address'
+                                    ]
+                                )
+                            ): ?>
+
+                                <p>
+
+                                    📍
+
+                                    <?= htmlspecialchars(
+                                        $vendor[
+                                            'business_address'
+                                        ]
+                                    ) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+                            <div
+                                class="vendor-card-details"
+                            >
+
+                                <span>
+
+                                    📦
+
+                                    <?= $vendor[
+                                        'total_products'
+                                    ] ?>
+
+                                    product(s)
+
+                                </span>
+
+                                <span>
+
+                                    🚚
+
+                                    <?= htmlspecialchars(
+                                        $vendor[
+                                            'delivery_method'
+                                        ]
+                                    ) ?>
+
+                                </span>
+
+                            </div>
+
+                            <a
+                                href="vendor.php?id=<?= $vendor[
+                                    'vendor_id'
+                                ] ?>"
+                                class="btn btn-primary"
+                            >
+
+                                View Vendor
+
+                            </a>
+
+                        </div>
+
+                    <?php endwhile; ?>
+
+                </div>
+
+            <?php else: ?>
+
+                <div class="empty-products">
+
+                    <div class="empty-icon">
+
+                        🏪
+
+                    </div>
+
+                    <h3>
+
+                        No Vendors Available
+
+                    </h3>
+
+                    <p>
+
+                        There are currently no approved
+                        vendors.
+
+                    </p>
+
+                </div>
+
+            <?php endif; ?>
+
+        </section>
+
+    </main>
+
+<?php
+
+}
+
+?>
+
+<?php include "includes/footer.php"; ?>
