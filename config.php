@@ -5,7 +5,6 @@ $username = "root";
 $password = "";
 $database = "vendorhub";
 
-
 $conn = mysqli_connect(
     $host,
     $username,
@@ -13,10 +12,24 @@ $conn = mysqli_connect(
     $database
 );
 
+if (!$conn) {
 
-if(!$conn)
-{
-    die("Database connection failed: " . mysqli_connect_error());
+    die(
+        "Database connection failed: "
+        . mysqli_connect_error()
+    );
+
+}
+
+mysqli_set_charset(
+    $conn,
+    "utf8mb4"
+);
+
+if (session_status() === PHP_SESSION_NONE) {
+
+    session_start();
+
 }
 
 ?>
