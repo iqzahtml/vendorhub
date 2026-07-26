@@ -9,7 +9,8 @@ require_once dirname(__DIR__) . '/config.php';
 <html lang="en">
 
 <head>
-
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <meta charset="UTF-8">
 
     <meta
