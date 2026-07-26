@@ -1,149 +1,157 @@
 <?php
-session_start();
+
+require_once "includes/header.php";
+
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>VendorHub</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<?php include "includes/navbar.php"; ?>
 
-<body>
-
-<!-- Header -->
-<header>
-    <div class="logo">
-        VendorHub
-    </div>
-
-    <nav>
-        <a href="index.php">Home</a>
-        <a href="#">Product</a>
-        <a href="#">Vendor</a>
-        <a href="#">About</a>
-    </nav>
-</header>
-
-
-<!-- Hero Section -->
 <section class="hero">
 
-    <div class="hero-text">
-        <h1>Welcome to VendorHub</h1>
+    <div class="hero-content">
+
+        <h1>
+
+            Discover.
+
+            <span>Shop.</span>
+
+            Connect.
+
+        </h1>
 
         <p>
-            Discover products from local vendors easily.
-            Support small businesses in one platform.
+
+            VendorHub connects you with local vendors
+            and unique products in one simple marketplace.
+
         </p>
 
-        <button onclick="openLogin()">
-            Start Shopping
-        </button>
+        <a href="product.php"
+           class="btn btn-primary">
+
+            Explore Products
+
+        </a>
 
     </div>
 
 </section>
 
+<section class="section">
 
-<!-- Category Section -->
-<section class="category">
+    <div class="section-title">
 
-<h2>Categories</h2>
+        <h2>
 
-<div class="category-box">
+            Explore VendorHub
 
-    <div>
-        <h3>Food</h3>
-        <p>Delicious homemade food</p>
+        </h2>
+
+        <p>
+
+            Everything you need in one marketplace.
+
+        </p>
+
     </div>
 
-    <div>
-        <h3>Fashion</h3>
-        <p>Trendy products</p>
-    </div>
+    <div class="category-grid">
 
-    <div>
-        <h3>Services</h3>
-        <p>Various services</p>
-    </div>
+        <a href="product.php"
+           class="category-card">
 
-</div>
+            <div class="category-icon">
+
+                🛍️
+
+            </div>
+
+            <h3>
+
+                Products
+
+            </h3>
+
+            <p>
+
+                Browse products from different vendors.
+
+            </p>
+
+        </a>
+
+        <a href="category.php"
+           class="category-card">
+
+            <div class="category-icon">
+
+                📦
+
+            </div>
+
+            <h3>
+
+                Categories
+
+            </h3>
+
+            <p>
+
+                Find products based on categories.
+
+            </p>
+
+        </a>
+
+        <a href="vendor.php"
+           class="category-card">
+
+            <div class="category-icon">
+
+                🏪
+
+            </div>
+
+            <h3>
+
+                Vendors
+
+            </h3>
+
+            <p>
+
+                Discover local businesses.
+
+            </p>
+
+        </a>
+
+        <a href="register.php"
+           class="category-card">
+
+            <div class="category-icon">
+
+                ✨
+
+            </div>
+
+            <h3>
+
+                Join Us
+
+            </h3>
+
+            <p>
+
+                Become a customer or vendor.
+
+            </p>
+
+        </a>
+
+    </div>
 
 </section>
 
-
-<!-- Login Popup -->
-
-<div id="loginPopup" class="popup">
-
-<div class="popup-content">
-
-<span onclick="closeLogin()" class="close">
-&times;
-</span>
-
-
-<h2>Login</h2>
-
-
-<form action="login.php" method="POST">
-
-<label>Email</label>
-<input type="email" name="email" required>
-
-
-<label>Password</label>
-<input type="password" name="password" required>
-
-
-<button type="submit">
-Login
-</button>
-
-</form>
-
-
-<p>
-Don't have account?
-<a href="register.php">
-Register
-</a>
-</p>
-
-
-</div>
-
-</div>
-
-
-
-<script>
-
-
-// automatically show popup when page open
-
-window.onload = function()
-{
-    document.getElementById("loginPopup").style.display="block";
-}
-
-
-
-function openLogin()
-{
-    document.getElementById("loginPopup").style.display="block";
-}
-
-
-function closeLogin()
-{
-    document.getElementById("loginPopup").style.display="none";
-}
-
-
-</script>
-
-
-</body>
-</html>
+<?php include "includes/footer.php"; ?>
