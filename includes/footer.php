@@ -1,45 +1,103 @@
-<nav class="navbar">
+<footer class="footer">
 
-    <a href="index.php" class="logo">
-        Vendor<span>Hub</span>
-    </a>
+    <div class="footer-content">
 
-    <div class="nav-links">
+        <div class="footer-section">
 
-        <a href="index.php">Home</a>
+            <h3>
 
-        <a href="product.php">Products</a>
+                VendorHub
 
-        <a href="category.php">Categories</a>
+            </h3>
 
-        <a href="vendor.php">Vendors</a>
+            <p>
 
-        <?php if (isset($_SESSION['user_id'])): ?>
+                A simple multi-vendor marketplace platform
+                connecting customers and local vendors.
 
-            <a href="cart.php">Cart</a>
+            </p>
 
-            <a href="order.php">My Orders</a>
+        </div>
+
+        <div class="footer-section">
+
+            <h3>
+
+                Quick Links
+
+            </h3>
+
+            <a href="index.php">
+
+                Home
+
+            </a>
+
+            <a href="product.php">
+
+                Products
+
+            </a>
+
+            <a href="category.php">
+
+                Categories
+
+            </a>
+
+            <a href="vendor.php">
+
+                Vendors
+
+            </a>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3>
+
+                Account
+
+            </h3>
+
+            <a href="login.php">
+
+                Login
+
+            </a>
+
+            <a href="register.php">
+
+                Register
+
+            </a>
 
             <a href="profile.php">
-                <?= htmlspecialchars($_SESSION['name']) ?>
+
+                Profile
+
             </a>
 
-            <a href="logout.php" class="btn btn-outline">
-                Logout
-            </a>
-
-        <?php else: ?>
-
-            <a href="login.php" class="btn btn-primary">
-                Login
-            </a>
-
-            <a href="register.php" class="btn btn-secondary">
-                Register
-            </a>
-
-        <?php endif; ?>
+        </div>
 
     </div>
 
-</nav>
+    <div class="footer-bottom">
+
+        <p>
+
+            &copy; 2026 VendorHub.
+            All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
