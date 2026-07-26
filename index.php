@@ -1,17 +1,18 @@
-<?php require_once "includes/header.php"; ?>
+<?php
+
+require_once "includes/header.php";
+
+?>
 
 <?php include "includes/navbar.php"; ?>
 
-<!-- LOGIN MODAL -->
+<!-- Login Modal -->
 <div id="loginModal" class="modal">
 
-    ...
-    (kod modal login anda)
     ...
 
 </div>
 
-<!-- Hero -->
 <section class="hero">
 
     ...
@@ -24,7 +25,6 @@
 
 </section>
 
-<!-- LETAK SCRIPT DI SINI -->
 <script>
 
 window.onload = function () {
@@ -39,9 +39,9 @@ function closeLoginModal() {
 
 }
 
-window.onclick = function (e) {
+window.onclick = function (event) {
 
-    if (e.target == document.getElementById("loginModal")) {
+    if (event.target == document.getElementById("loginModal")) {
 
         document.getElementById("loginModal").style.display = "none";
 
