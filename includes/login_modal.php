@@ -1,64 +1,94 @@
-<div id="loginModal" class="modal">
+<div id="loginModal"
+     class="modal">
 
     <div class="modal-content">
 
-        <span class="close" onclick="closeLoginModal()">
+        <button class="close"
+                onclick="closeLoginModal()">
+
             &times;
-        </span>
+
+        </button>
 
         <div class="auth-logo">
+
             Vendor<span>Hub</span>
+
         </div>
 
-        <h2>Welcome Back</h2>
+        <h2 class="modal-title">
 
-        <form action="login.php" method="POST">
+            Welcome Back
+
+        </h2>
+
+        <p class="modal-subtitle">
+
+            Login to continue shopping
+
+        </p>
+
+        <form action="login.php"
+              method="POST">
 
             <div class="form-group">
 
-                <label>Email</label>
+                <label for="modal-email">
 
-                <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    placeholder="Enter your email"
-                    required
-                >
+                    Email
+
+                </label>
+
+                <input type="email"
+                       id="modal-email"
+                       name="email"
+                       class="form-control"
+                       placeholder="Enter your email"
+                       required>
 
             </div>
 
             <div class="form-group">
 
-                <label>Password</label>
+                <label for="modal-password">
 
-                <input
-                    type="password"
-                    name="password"
-                    class="form-control"
-                    placeholder="Enter your password"
-                    required
-                >
+                    Password
+
+                </label>
+
+                <input type="password"
+                       id="modal-password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Enter your password"
+                       required>
 
             </div>
 
-            <button
-                type="submit"
-                class="btn btn-primary"
-                style="width: 100%;"
-            >
+            <button type="submit"
+                    class="btn btn-primary login-button">
+
                 Login
+
             </button>
 
         </form>
 
-        <p class="modal-register">
-            Don't have an account?
+        <div class="modal-register">
 
-            <a href="register.php">
-                Register here
-            </a>
-        </p>
+            <p>
+
+                Don't have an account?
+
+                <a href="register.php">
+
+                    Register here
+
+                </a>
+
+            </p>
+
+        </div>
 
     </div>
 
