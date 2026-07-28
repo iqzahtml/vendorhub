@@ -1,148 +1,315 @@
-.modal{
+/* ===========================
+   HOCHIPOHUB STYLE.CSS
+   PART 1
+=========================== */
 
-    display:none;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-    position:fixed;
+html{
+    scroll-behavior:smooth;
+}
 
-    z-index:9999;
+body{
+    background:#F4F8FF;
+    color:#1E293B;
+    overflow-x:hidden;
+}
 
-    left:0;
+/* ===========================
+        COLOR VARIABLES
+=========================== */
+
+:root{
+
+    --primary:#2563EB;
+
+    --secondary:#3B82F6;
+
+    --lightBlue:#60A5FA;
+
+    --sky:#93C5FD;
+
+    --dark:#1E3A8A;
+
+    --navy:#172554;
+
+    --white:#FFFFFF;
+
+    --background:#F8FBFF;
+
+    --border:#D9E8FF;
+
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+
+    --gradient:linear-gradient(
+    135deg,
+    #1E40AF,
+    #2563EB,
+    #3B82F6,
+    #60A5FA);
+
+}
+
+/* ===========================
+        CONTAINER
+=========================== */
+
+.container{
+
+    width:90%;
+
+    max-width:1300px;
+
+    margin:auto;
+
+}
+
+/* ===========================
+        LINKS
+=========================== */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+img{
+
+    width:100%;
+
+}
+
+/* ===========================
+        NAVBAR
+=========================== */
+
+.navbar{
+
+    position:sticky;
 
     top:0;
 
     width:100%;
 
-    height:100%;
+    z-index:999;
 
-    background:rgba(0,0,0,.45);
+    background:var(--gradient);
 
-    justify-content:center;
+    box-shadow:var(--shadow);
+
+}
+
+.navbar .container{
+
+    display:flex;
+
+    justify-content:space-between;
 
     align-items:center;
 
+    height:85px;
+
 }
 
-.modal-content{
+/* ===========================
+        LOGO
+=========================== */
 
-    width:400px;
+.logo{
 
-    background:#fff;
+    display:flex;
 
-    border-radius:15px;
+    align-items:center;
 
-    padding:35px;
+    gap:12px;
+
+}
+
+.logo img{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    border:3px solid white;
+
+}
+
+.logo span{
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/* ===========================
+        MENU
+=========================== */
+
+.menu{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:35px;
+
+}
+
+.menu li a{
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    transition:.3s;
 
     position:relative;
 
-    animation:popup .3s ease;
-
 }
 
-@keyframes popup{
+.menu li a::after{
 
-    from{
-
-        transform:scale(.8);
-
-        opacity:0;
-
-    }
-
-    to{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-
-.close{
+    content:"";
 
     position:absolute;
 
-    right:20px;
+    width:0;
 
-    top:15px;
+    height:3px;
 
-    font-size:30px;
+    background:white;
 
-    cursor:pointer;
+    bottom:-8px;
 
-}
+    left:0;
 
-.login-logo{
-
-    text-align:center;
-
-    margin-bottom:25px;
+    transition:.3s;
 
 }
 
-.login-logo h2{
-
-    color:#2563eb;
-
-    font-size:32px;
-
-    margin-bottom:10px;
-
-}
-
-.login-logo p{
-
-    color:#666;
-
-}
-
-.input-group{
-
-    margin-bottom:18px;
-
-}
-
-.input-group label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-.input-group input{
+.menu li a:hover::after{
 
     width:100%;
 
-    padding:12px;
+}
 
-    border:1px solid #ddd;
+/* ===========================
+        SEARCH
+=========================== */
 
-    border-radius:8px;
+.search-box{
 
-    font-size:15px;
+    display:flex;
+
+    align-items:center;
+
+    background:white;
+
+    border-radius:40px;
+
+    overflow:hidden;
+
+    width:320px;
 
 }
 
-.login-btn{
-
-    width:100%;
-
-    padding:12px;
-
-    background:#2563eb;
-
-    color:#fff;
+.search-box input{
 
     border:none;
 
-    border-radius:8px;
+    outline:none;
+
+    width:100%;
+
+    padding:12px 15px;
+
+    font-size:14px;
+
+}
+
+.search-box button{
+
+    width:55px;
+
+    border:none;
+
+    background:#2563EB;
+
+    color:white;
 
     cursor:pointer;
 
-    font-size:16px;
+    transition:.3s;
+
+}
+
+.search-box button:hover{
+
+    background:#1E40AF;
+
+}
+
+/* ===========================
+        RIGHT MENU
+=========================== */
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.nav-right i{
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+        BUTTON
+=========================== */
+
+.login-btn{
+
+    border:none;
+
+    background:white;
+
+    color:#2563EB;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    cursor:pointer;
 
     transition:.3s;
 
@@ -150,24 +317,196 @@
 
 .login-btn:hover{
 
-    background:#1d4ed8;
+    transform:translateY(-3px);
 
 }
 
-.register-text{
+.register-btn{
 
-    margin-top:20px;
+    border:none;
 
-    text-align:center;
+    background:#0F172A;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
 
 }
 
-.register-text a{
+.register-btn:hover{
 
-    color:#2563eb;
+    background:#020617;
 
-    text-decoration:none;
+}
 
-    font-weight:bold;
+/* ===========================
+        HERO
+=========================== */
+
+.hero{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:90px 8%;
+
+    min-height:650px;
+
+    background:linear-gradient(
+    rgba(255,255,255,.90),
+    rgba(255,255,255,.90)
+    ),
+    url("../images/banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+.hero-content{
+
+    width:50%;
+
+}
+
+.hero-content h1{
+
+    font-size:58px;
+
+    color:#1E293B;
+
+    line-height:1.2;
+
+}
+
+.hero-content span{
+
+    color:#2563EB;
+
+}
+
+.hero-content p{
+
+    margin:30px 0;
+
+    color:#64748B;
+
+    font-size:18px;
+
+    line-height:30px;
+
+}
+
+/* ===========================
+        HERO BUTTONS
+=========================== */
+
+.hero-button{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.primary-btn{
+
+    background:#2563EB;
+
+    color:white;
+
+    padding:16px 35px;
+
+    border-radius:40px;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.primary-btn:hover{
+
+    background:#1D4ED8;
+
+    transform:translateY(-4px);
+
+}
+
+.secondary-btn{
+
+    background:white;
+
+    color:#2563EB;
+
+    padding:16px 35px;
+
+    border:2px solid #2563EB;
+
+    border-radius:40px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.secondary-btn:hover{
+
+    background:#2563EB;
+
+    color:white;
+
+}
+
+/* ===========================
+        HERO IMAGE
+=========================== */
+
+.hero-image{
+
+    width:45%;
+
+}
+
+.hero-image img{
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+/* ===========================
+        FLOAT EFFECT
+=========================== */
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-20px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
 
 }
