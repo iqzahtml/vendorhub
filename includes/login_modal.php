@@ -2,45 +2,37 @@
 
     <div class="modal-content">
 
-        <button class="close" onclick="closeLoginModal()">
-            &times;
-        </button>
+        <span class="close" onclick="closeLoginModal()">&times;</span>
 
-        <div class="auth-logo">
-            Vendor<span>Hub</span>
+        <div class="login-logo">
+
+            <h2>VendorHub</h2>
+
+            <p>Welcome Back</p>
+
         </div>
-
-        <h2 class="modal-title">
-            Welcome Back
-        </h2>
-
-        <p class="modal-subtitle">
-            Login to continue shopping
-        </p>
 
         <form action="login.php" method="POST">
 
-            <div class="form-group">
+            <div class="input-group">
 
                 <label>Email</label>
 
                 <input
                     type="email"
                     name="email"
-                    class="form-control"
                     placeholder="Enter your email"
                     required>
 
             </div>
 
-            <div class="form-group">
+            <div class="input-group">
 
                 <label>Password</label>
 
                 <input
                     type="password"
                     name="password"
-                    class="form-control"
                     placeholder="Enter your password"
                     required>
 
@@ -48,7 +40,7 @@
 
             <button
                 type="submit"
-                class="login-button">
+                class="login-btn">
 
                 Login
 
@@ -56,15 +48,17 @@
 
         </form>
 
-        <div class="modal-register">
+        <p class="register-text">
 
             Don't have an account?
 
             <a href="register.php">
-                Register Here
+
+                Register
+
             </a>
 
-        </div>
+        </p>
 
     </div>
 
