@@ -1,28 +1,35 @@
 <?php
 
-function redirect($page) {
-    header("Location: $page");
-    exit();
+function clean($data)
+{
+    return htmlspecialchars(trim($data));
 }
 
-function isLoggedIn() {
-    return isset($_SESSION['user_id']);
+function randomCode($length = 6)
+{
+    return substr(str_shuffle("0123456789"), 0, $length);
 }
 
-function requireLogin() {
-    if (!isLoggedIn()) {
-        redirect("login.php");
+function uploadImage($file, $folder)
+{
+    if ($file['error'] != 0) {
+        return "";
     }
-}
 
-function cleanInput($conn, $data) {
-    return mysqli_real_escape_string(
-        $conn,
-        trim($data)
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+    $filename = uniqid() . "." . $extension;
+
+    move_uploaded_file(
+        $file['tmp_name'],
+        "uploads/$folder/" . $filename
     );
+
+    return $filename;
 }
 
-function formatPrice($price) {
+function formatPrice($price)
+{
     return "RM " . number_format($price, 2);
 }
 
