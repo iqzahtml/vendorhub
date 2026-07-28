@@ -1,15 +1,44 @@
 <?php
+/* =====================================================
+   HOCHIPOHUB
+   auth/logout.php
+
+   Logout Controller
+===================================================== */
+
+
+require_once "../config.php";
+
+
+
+
 
 session_start();
 
-$_SESSION = array();
+
+
+session_unset();
+
+
 
 session_destroy();
 
+
+
+
+
+
 header(
-    "Location: index.php"
+
+"Location: "
+.BASE_URL
+
 );
 
+
+
 exit();
+
+
 
 ?>
