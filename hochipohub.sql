@@ -14,37 +14,37 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.admin_logs: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.cart: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.categories: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.commission: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.inventory: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.mfa_codes: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.orders: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.order_details: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.password_resets: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.payments: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.products: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.reviews: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.users: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.vendors: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.vendor_applications: ~0 rows (approximately)
 
--- Data exporting was unselected.
+-- Dumping data for table hochipohub.wishlist: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
