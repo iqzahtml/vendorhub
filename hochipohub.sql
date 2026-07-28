@@ -635,7 +635,7 @@ CREATE TABLE vendor_applications (
 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-
+hochipohubadmin_logshochipohub
 
     FOREIGN KEY(user_id)
 
