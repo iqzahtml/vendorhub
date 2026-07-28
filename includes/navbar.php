@@ -2,11 +2,12 @@
 /* =====================================================
    HOCHIPOHUB
    includes/navbar.php
+
+   Main Navigation Bar
 ===================================================== */
 
 
 $user = currentUser();
-
 
 ?>
 
@@ -18,12 +19,17 @@ $user = currentUser();
 
 
 
-<!-- LOGO -->
+<!-- ===========================
+     LOGO
+=========================== -->
 
-<a href="<?= BASE_URL ?>" class="nav-logo">
+
+<a href="<?= BASE_URL ?>index.php" class="nav-logo">
 
 
-<img src="<?= BASE_URL ?>image/logo.jpg">
+<img 
+src="<?= BASE_URL ?>image/logo.jpg"
+alt="HochipoHub Logo">
 
 
 <span>
@@ -39,78 +45,130 @@ HochipoHub
 
 
 
-<!-- MENU -->
+
+
+
+<!-- ===========================
+     NAVIGATION MENU
+=========================== -->
+
 
 <ul class="nav-menu">
 
 
+
 <li>
 
-<a href="<?= BASE_URL ?>index.php">
+<a 
+href="<?= BASE_URL ?>index.php"
+class="<?= activePage('index.php') ?>">
+
 
 <i class="fa-solid fa-house"></i>
 
 Home
 
+
 </a>
 
 </li>
 
 
 
+
+
+
 <li>
 
-<a href="<?= BASE_URL ?>catalog.php">
+<a 
+href="<?= BASE_URL ?>catalog.php"
+class="<?= activePage('catalog.php') ?>">
+
 
 <i class="fa-solid fa-store"></i>
 
+
 Products
 
+
 </a>
+
 
 </li>
 
 
 
+
+
+
+
 <li>
 
-<a href="<?= BASE_URL ?>category.php">
+<a 
+href="<?= BASE_URL ?>category.php"
+class="<?= activePage('category.php') ?>">
+
 
 <i class="fa-solid fa-layer-group"></i>
 
-Category
+
+Categories
+
 
 </a>
+
 
 </li>
 
 
 
+
+
+
+
 <li>
 
-<a href="<?= BASE_URL ?>vendor.php">
+<a 
+href="<?= BASE_URL ?>vendor.php"
+class="<?= activePage('vendor.php') ?>">
+
 
 <i class="fa-solid fa-shop"></i>
 
-Vendor
+
+Vendors
+
 
 </a>
 
+
 </li>
+
+
+
+
 
 
 
 <li>
 
-<a href="<?= BASE_URL ?>contact.php">
+<a 
+href="<?= BASE_URL ?>contact.php"
+class="<?= activePage('contact.php') ?>">
+
 
 <i class="fa-solid fa-envelope"></i>
 
+
 Contact
+
 
 </a>
 
+
 </li>
+
+
 
 
 
@@ -120,35 +178,69 @@ Contact
 
 
 
-<!-- RIGHT SIDE -->
+
+
+
+
+<!-- ===========================
+     RIGHT NAVIGATION
+=========================== -->
+
 
 <div class="nav-actions">
+
+
+
 
 
 
 <?php if(!$user): ?>
 
 
-<button 
+
+<!-- LOGIN -->
+
+<button
+
 class="nav-login"
+
 onclick="openLogin()">
+
 
 <i class="fa-solid fa-right-to-bracket"></i>
 
+
 Login
+
 
 </button>
 
 
 
 
-<button 
+
+
+<!-- REGISTER -->
+
+
+<button
+
 class="nav-register"
+
 onclick="openRegister()">
+
+
+<i class="fa-solid fa-user-plus"></i>
+
 
 Register
 
+
 </button>
+
+
+
+
 
 
 
@@ -156,27 +248,15 @@ Register
 
 
 
-<div class="nav-user">
 
 
-<i class="fa-solid fa-user-circle"></i>
+<!-- CART -->
 
 
-<span>
+<a 
 
-<?= clean($user['name']); ?>
+href="<?= BASE_URL ?>cart.php"
 
-</span>
-
-
-
-</div>
-
-
-
-
-
-<a href="<?= BASE_URL ?>cart.php" 
 class="cart-btn">
 
 
@@ -196,25 +276,92 @@ class="cart-btn">
 
 
 
-<div class="dropdown">
 
 
-<button class="drop-btn">
 
-<i class="fa-solid fa-bars"></i>
+
+<!-- USER PROFILE -->
+
+
+<div class="user-dropdown">
+
+
+
+<button 
+class="user-dropdown-btn">
+
+
+<img
+
+src="<?= BASE_URL ?>image/logo.jpg"
+
+class="user-avatar">
+
+
+<span>
+
+<?= clean($user['name']); ?>
+
+</span>
+
+
+<i class="fa-solid fa-chevron-down"></i>
+
 
 </button>
 
 
 
-<div class="dropdown-menu">
+
+
+
+
+
+<div class="user-dropdown-menu">
+
+
+
 
 
 <a href="<?= BASE_URL ?>profile.php">
 
-Profile
+
+<i class="fa-solid fa-user"></i>
+
+
+My Profile
+
 
 </a>
+
+
+
+
+
+
+
+<?php if($user['role']=="customer"): ?>
+
+
+<a href="<?= BASE_URL ?>order.php">
+
+
+<i class="fa-solid fa-box"></i>
+
+
+My Orders
+
+
+</a>
+
+
+
+<?php endif; ?>
+
+
+
+
+
 
 
 
@@ -223,12 +370,35 @@ Profile
 
 <a href="<?= BASE_URL ?>dashboard.php">
 
-Dashboard
+
+<i class="fa-solid fa-chart-line"></i>
+
+
+Vendor Dashboard
+
 
 </a>
 
 
+
+<a href="<?= BASE_URL ?>product.php">
+
+
+<i class="fa-solid fa-box-open"></i>
+
+
+Manage Products
+
+
+</a>
+
+
+
 <?php endif; ?>
+
+
+
+
 
 
 
@@ -238,26 +408,46 @@ Dashboard
 
 <a href="<?= BASE_URL ?>admin/index.php">
 
+
+<i class="fa-solid fa-user-shield"></i>
+
+
 Admin Panel
+
 
 </a>
 
 
+
 <?php endif; ?>
+
+
+
+
 
 
 
 <a href="<?= BASE_URL ?>auth/logout.php">
 
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+
 Logout
+
 
 </a>
 
 
+
+
+
 </div>
 
 
 </div>
+
+
 
 
 
@@ -265,20 +455,33 @@ Logout
 
 
 
-</div>
 
 
 
+<!-- MOBILE MENU -->
 
-<!-- MOBILE BUTTON -->
 
-<button class="mobile-menu-btn">
+<button 
+
+class="mobile-menu-btn"
+
+onclick="toggleMobileMenu()">
+
 
 
 <i class="fa-solid fa-bars"></i>
 
 
+
 </button>
+
+
+
+
+
+</div>
+
+
 
 
 
@@ -286,3 +489,25 @@ Logout
 
 
 </nav>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     LOGIN / REGISTER MODAL
+=========================== -->
+
+
+<?php
+
+include DIR . "/login_modal.php";
+
+include DIR . "/register_modal.php";
+
+
+?>
