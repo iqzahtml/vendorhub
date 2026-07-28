@@ -19,14 +19,11 @@ require_once "includes/header.php";
     ...
 
 </section>
-
 <script>
 
-window.onload = function () {
+window.onload=function(){
 
-    const modal = document.getElementById("loginModal");
-
-    modal.style.display = "flex";
+    document.getElementById("loginModal").style.display="flex";
 
 }
 
@@ -36,11 +33,11 @@ function closeLoginModal(){
 
 }
 
-window.onclick=function(event){
+window.onclick=function(e){
 
-    const modal=document.getElementById("loginModal");
+    var modal=document.getElementById("loginModal");
 
-    if(event.target==modal){
+    if(e.target==modal){
 
         modal.style.display="none";
 
