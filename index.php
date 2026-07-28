@@ -6,12 +6,7 @@ require_once "includes/header.php";
 
 <?php include "includes/navbar.php"; ?>
 
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
-
-    ...
-
-</div>
+<?php include "includes/login_modal.php"; ?>
 
 <section class="hero">
 
@@ -29,21 +24,25 @@ require_once "includes/header.php";
 
 window.onload = function () {
 
-    document.getElementById("loginModal").style.display = "flex";
+    const modal = document.getElementById("loginModal");
+
+    modal.style.display = "flex";
 
 }
 
-function closeLoginModal() {
+function closeLoginModal(){
 
-    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("loginModal").style.display="none";
 
 }
 
-window.onclick = function (event) {
+window.onclick=function(event){
 
-    if (event.target == document.getElementById("loginModal")) {
+    const modal=document.getElementById("loginModal");
 
-        document.getElementById("loginModal").style.display = "none";
+    if(event.target==modal){
+
+        modal.style.display="none";
 
     }
 
