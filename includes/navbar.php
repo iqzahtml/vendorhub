@@ -1,24 +1,54 @@
+<?php
+/* =====================================================
+   HOCHIPOHUB
+   includes/navbar.php
+===================================================== */
+
+
+$user = currentUser();
+
+
+?>
+
+
 <nav class="navbar">
 
-<div class="container">
 
-<div class="logo">
+<div class="nav-container">
 
-<a href="<?php echo BASE_URL; ?>index.php">
 
-<img src="<?php echo BASE_URL; ?>images/logo.jpg" alt="HochipoHub">
 
-<span>HochipoHub</span>
+<!-- LOGO -->
+
+<a href="<?= BASE_URL ?>" class="nav-logo">
+
+
+<img src="<?= BASE_URL ?>image/logo.jpg">
+
+
+<span>
+
+HochipoHub
+
+</span>
+
 
 </a>
 
-</div>
 
-<ul class="menu">
+
+
+
+<!-- MENU -->
+
+<ul class="nav-menu">
+
 
 <li>
 
-<a href="<?php echo BASE_URL; ?>index.php">
+<a href="<?= BASE_URL ?>index.php">
+
+<i class="fa-solid fa-house"></i>
 
 Home
 
@@ -26,150 +56,233 @@ Home
 
 </li>
 
+
+
 <li>
 
-<a href="<?php echo BASE_URL; ?>catalog.php">
+<a href="<?= BASE_URL ?>catalog.php">
 
-Catalog
+<i class="fa-solid fa-store"></i>
+
+Products
 
 </a>
 
 </li>
 
+
+
 <li>
 
-<a href="<?php echo BASE_URL; ?>category.php">
+<a href="<?= BASE_URL ?>category.php">
 
-Categories
+<i class="fa-solid fa-layer-group"></i>
+
+Category
 
 </a>
 
 </li>
 
+
+
 <li>
 
-<a href="<?php echo BASE_URL; ?>vendor.php">
+<a href="<?= BASE_URL ?>vendor.php">
 
-Vendors
+<i class="fa-solid fa-shop"></i>
+
+Vendor
 
 </a>
 
 </li>
 
+
+
 <li>
 
-<a href="<?php echo BASE_URL; ?>dashboard.php">
+<a href="<?= BASE_URL ?>contact.php">
 
-Dashboard
+<i class="fa-solid fa-envelope"></i>
+
+Contact
 
 </a>
 
 </li>
+
+
 
 </ul>
 
-<div class="search-box">
 
-<input
-type="text"
-id="searchInput"
-placeholder="Search product...">
 
-<button>
 
-<i class="fa-solid fa-magnifying-glass"></i>
 
-</button>
+<!-- RIGHT SIDE -->
 
-</div>
+<div class="nav-actions">
 
-<div class="nav-right">
 
-<a href="<?php echo BASE_URL; ?>cart.php">
 
-<i class="fa-solid fa-cart-shopping"></i>
+<?php if(!$user): ?>
 
-</a>
 
-<?php
+<button 
+class="nav-login"
+onclick="openLogin()">
 
-if(isset($_SESSION['user_id']))
-{
-
-?>
-
-<div class="dropdown">
-
-<button class="dropbtn">
-
-<i class="fa-solid fa-user"></i>
-
-<?php echo $_SESSION['name']; ?>
-
-</button>
-
-<div class="dropdown-content">
-
-<a href="<?php echo BASE_URL; ?>profile.php">
-
-Profile
-
-</a>
-
-<a href="<?php echo BASE_URL; ?>dashboard.php">
-
-Dashboard
-
-</a>
-
-<a href="<?php echo BASE_URL; ?>auth/logout.php">
-
-Logout
-
-</a>
-
-</div>
-
-</div>
-
-<?php
-
-}
-
-else
-
-{
-
-?>
-
-<button class="login-btn" onclick="openLogin()">
+<i class="fa-solid fa-right-to-bracket"></i>
 
 Login
 
 </button>
 
-<button class="register-btn" onclick="openRegister()">
+
+
+
+<button 
+class="nav-register"
+onclick="openRegister()">
 
 Register
 
 </button>
 
-<?php
 
-}
 
-?>
+<?php else: ?>
+
+
+
+<div class="nav-user">
+
+
+<i class="fa-solid fa-user-circle"></i>
+
+
+<span>
+
+<?= clean($user['name']); ?>
+
+</span>
+
+
 
 </div>
 
+
+
+
+
+<a href="<?= BASE_URL ?>cart.php" 
+class="cart-btn">
+
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+
+<span id="cartCount">
+
+0
+
+</span>
+
+
+</a>
+
+
+
+
+
+<div class="dropdown">
+
+
+<button class="drop-btn">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+<div class="dropdown-menu">
+
+
+<a href="<?= BASE_URL ?>profile.php">
+
+Profile
+
+</a>
+
+
+
+<?php if($user['role']=="vendor"): ?>
+
+
+<a href="<?= BASE_URL ?>dashboard.php">
+
+Dashboard
+
+</a>
+
+
+<?php endif; ?>
+
+
+
+
+<?php if($user['role']=="admin"): ?>
+
+
+<a href="<?= BASE_URL ?>admin/index.php">
+
+Admin Panel
+
+</a>
+
+
+<?php endif; ?>
+
+
+
+<a href="<?= BASE_URL ?>auth/logout.php">
+
+Logout
+
+</a>
+
+
 </div>
+
+
+</div>
+
+
+
+<?php endif; ?>
+
+
+
+</div>
+
+
+
+
+<!-- MOBILE BUTTON -->
+
+<button class="mobile-menu-btn">
+
+
+<i class="fa-solid fa-bars"></i>
+
+
+</button>
+
+
+
+</div>
+
 
 </nav>
-
-<?php
-
-include "login_modal.php";
-
-include "register_modal.php";
-
-?>
