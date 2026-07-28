@@ -22,19 +22,19 @@
 
 }
 
-.modal-content{
+.login-box{
 
-    width:400px;
+    width:430px;
 
     background:#fff;
 
-    border-radius:15px;
-
-    padding:35px;
+    padding:40px;
 
     position:relative;
 
-    animation:popup .3s ease;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    animation:popup .35s;
 
 }
 
@@ -42,7 +42,7 @@
 
     from{
 
-        transform:scale(.8);
+        transform:translateY(-20px);
 
         opacity:0;
 
@@ -50,7 +50,7 @@
 
     to{
 
-        transform:scale(1);
+        transform:translateY(0);
 
         opacity:1;
 
@@ -62,57 +62,69 @@
 
     position:absolute;
 
-    right:20px;
+    top:18px;
 
-    top:15px;
+    right:22px;
 
-    font-size:30px;
+    font-size:28px;
 
     cursor:pointer;
 
+    color:#888;
+
 }
 
-.login-logo{
+.close:hover{
+
+    color:#000;
+
+}
+
+.logo{
 
     text-align:center;
 
-    margin-bottom:25px;
-
-}
-
-.login-logo h2{
-
-    color:#2563eb;
+    margin-bottom:8px;
 
     font-size:32px;
 
-    margin-bottom:10px;
+    letter-spacing:2px;
+
+    color:#1e3a8a;
 
 }
 
-.login-logo p{
+.subtitle{
 
-    color:#666;
+    text-align:center;
+
+    color:#555;
+
+    margin-bottom:35px;
+
+    font-size:17px;
 
 }
 
-.input-group{
+.form-group{
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
 }
 
-.input-group label{
+.form-group label{
 
     display:block;
 
     margin-bottom:8px;
 
+    font-size:14px;
+
     font-weight:600;
 
 }
 
-.input-group input{
+.form-group input{
 
     width:100%;
 
@@ -120,9 +132,15 @@
 
     border:1px solid #ddd;
 
-    border-radius:8px;
-
     font-size:15px;
+
+    outline:none;
+
+}
+
+.form-group input:focus{
+
+    border:1px solid royalblue;
 
 }
 
@@ -130,19 +148,21 @@
 
     width:100%;
 
-    padding:12px;
+    background:#111;
 
-    background:#2563eb;
+    color:white;
 
-    color:#fff;
+    padding:14px;
 
     border:none;
 
-    border-radius:8px;
+    margin-top:10px;
 
     cursor:pointer;
 
-    font-size:16px;
+    font-weight:bold;
+
+    letter-spacing:1px;
 
     transition:.3s;
 
@@ -150,23 +170,25 @@
 
 .login-btn:hover{
 
-    background:#1d4ed8;
+    background:#2563eb;
 
 }
 
-.register-text{
-
-    margin-top:20px;
+.bottom-text{
 
     text-align:center;
 
+    margin-top:28px;
+
+    font-size:14px;
+
 }
 
-.register-text a{
-
-    color:#2563eb;
+.bottom-text a{
 
     text-decoration:none;
+
+    color:#2563eb;
 
     font-weight:bold;
 
