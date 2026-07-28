@@ -1,102 +1,118 @@
-<footer class="footer">
+</div>
 
-    <div class="footer-content">
+<footer>
 
-        <div class="footer-section">
+<div class="footer-container">
 
-            <h3>
+<div class="footer-box">
 
-                VendorHub
+<h2>HochipoHub</h2>
 
-            </h3>
+<p>
 
-            <p>
+Your trusted student marketplace.
 
-                A simple multi-vendor marketplace platform
-                connecting customers and local vendors.
+Buy, Sell and Grow together.
 
-            </p>
+</p>
 
-        </div>
+</div>
 
-        <div class="footer-section">
+<div class="footer-box">
 
-            <h3>
+<h3>Quick Links</h3>
 
-                Quick Links
+<a href="index.php">
 
-            </h3>
+Home
 
-            <a href="index.php">
+</a>
 
-                Home
+<a href="catalog.php">
 
-            </a>
+Catalog
 
-            <a href="product.php">
+</a>
 
-                Products
+<a href="vendor.php">
 
-            </a>
+Vendor
 
-            <a href="category.php">
+</a>
 
-                Categories
+<a href="contact.php">
 
-            </a>
+Contact
 
-            <a href="vendor.php">
+</a>
 
-                Vendors
+</div>
 
-            </a>
+<div class="footer-box">
 
-        </div>
+<h3>Support</h3>
 
-        <div class="footer-section">
+<a href="#">
 
-            <h3>
+FAQ
 
-                Account
+</a>
 
-            </h3>
+<a href="#">
 
-            <a href="login.php">
+Privacy Policy
 
-                Login
+</a>
 
-            </a>
+<a href="#">
 
-            <a href="register.php">
+Terms & Conditions
 
-                Register
+</a>
 
-            </a>
+</div>
 
-            <a href="profile.php">
+<div class="footer-box">
 
-                Profile
+<h3>Follow Us</h3>
 
-            </a>
+<div class="social">
 
-        </div>
+<i class="fab fa-facebook"></i>
 
-    </div>
+<i class="fab fa-instagram"></i>
 
-    <div class="footer-bottom">
+<i class="fab fa-x-twitter"></i>
 
-        <p>
+<i class="fab fa-tiktok"></i>
 
-            &copy; 2026 VendorHub.
-            All Rights Reserved.
+</div>
 
-        </p>
+</div>
 
-    </div>
+</div>
+
+<div class="copyright">
+
+© <?php echo date("Y"); ?>
+
+HochipoHub.
+
+All Rights Reserved.
+
+</div>
 
 </footer>
 
-<script src="js/script.js"></script>
+<script src="<?php echo BASE_URL; ?>js/script.js"></script>
+
+<script src="<?php echo BASE_URL; ?>js/modal.js"></script>
+
+<script src="<?php echo BASE_URL; ?>js/search.js"></script>
+
+<script src="<?php echo BASE_URL; ?>js/cart.js"></script>
+
+<script src="<?php echo BASE_URL; ?>js/validation.js"></script>
 
 </body>
 
