@@ -1,35 +1,17 @@
 <?php
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "vendorhub";
-
-$conn = mysqli_connect(
-    $host,
-    $username,
-    $password,
-    $database
-);
-
-if (!$conn) {
-
-    die(
-        "Database connection failed: "
-        . mysqli_connect_error()
-    );
-
-}
-
-mysqli_set_charset(
-    $conn,
-    "utf8mb4"
-);
-
-if (session_status() === PHP_SESSION_NONE) {
-
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
-
 }
+
+date_default_timezone_set("Asia/Kuala_Lumpur");
+
+require_once DIR . "/database/db.php";
+require_once DIR . "/includes/functions.php";
+require_once DIR . "/includes/security.php";
+require_once DIR . "/includes/session.php";
+
+define("SITE_NAME", "HochipoHub");
+define("BASE_URL", "http://localhost/hochipohub/");
 
 ?>
