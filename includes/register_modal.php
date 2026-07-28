@@ -1,109 +1,559 @@
-<div id="registerModal" class="modal">
+<?php
+/* =====================================================
+   HOCHIPOHUB
+   Register Modal
+===================================================== */
+?>
 
-    <div class="modal-content register-container">
 
-        <span class="close" onclick="closeRegister()">&times;</span>
+<div id="registerModal" class="auth-modal">
 
-        <div class="register-left">
 
-            <img src="<?php echo BASE_URL; ?>images/logo.jpg">
 
-            <h2>Create Account</h2>
+<div class="modal-overlay"></div>
 
-            <p>Join HochipoHub today.</p>
 
-        </div>
 
-        <div class="register-right">
 
-            <h2>Register</h2>
 
-            <form action="<?php echo BASE_URL; ?>auth/register_process.php" method="POST">
+<div class="modal-box register-modal-box">
 
-                <div class="input-group">
 
-                    <label>Full Name</label>
 
-                    <input type="text" name="name" required>
 
-                </div>
 
-                <div class="input-group">
+<!-- CLOSE -->
 
-                    <label>Email</label>
+<button 
+class="modal-close"
+onclick="closeRegister()">
 
-                    <input type="email" name="email" required>
 
-                </div>
+<i class="fa-solid fa-xmark"></i>
 
-                <div class="input-group">
 
-                    <label>Phone Number</label>
+</button>
 
-                    <input type="text" name="phone" required>
 
-                </div>
 
-                <div class="input-group">
 
-                    <label>Password</label>
 
-                    <input type="password" name="password" required>
 
-                </div>
 
-                <div class="input-group">
+<!-- HEADER -->
 
-                    <label>Confirm Password</label>
+<div class="modal-header">
 
-                    <input type="password" name="confirm_password" required>
 
-                </div>
+<img 
+src="<?= BASE_URL ?>image/logo.jpg"
+class="modal-logo">
 
-                <div class="input-group">
 
-                    <label>Register As</label>
 
-                    <select name="role">
+<h2>
 
-                        <option value="customer">
+Create Account
 
-                            Customer
+</h2>
 
-                        </option>
 
-                        <option value="vendor">
 
-                            Vendor
+<p>
 
-                        </option>
+Join HochipoHub today
 
-                    </select>
+</p>
 
-                </div>
 
-                <button type="submit" class="btn-register">
 
-                    Register
+</div>
 
-                </button>
 
-            </form>
 
-            <p>
 
-                Already have an account?
 
-                <a href="#" onclick="switchToLogin()">
 
-                    Login
 
-                </a>
 
-            </p>
+<form
 
-        </div>
+id="registerForm"
 
-    </div>
+action="<?= BASE_URL ?>auth/register_process.php"
+
+method="POST"
+
+>
+
+
+
+
+
+
+
+
+
+<!-- NAME -->
+
+<div class="auth-form-group">
+
+
+<label>
+
+Full Name
+
+</label>
+
+
+
+<div class="input-icon">
+
+
+<i class="fa-solid fa-user"></i>
+
+
+<input
+
+type="text"
+
+name="name"
+
+placeholder="Enter your name"
+
+required>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- EMAIL -->
+
+<div class="auth-form-group">
+
+
+<label>
+
+Email Address
+
+</label>
+
+
+
+<div class="input-icon">
+
+
+<i class="fa-solid fa-envelope"></i>
+
+
+<input
+
+type="email"
+
+name="email"
+
+placeholder="example@email.com"
+
+required>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PHONE -->
+
+<div class="auth-form-group">
+
+
+<label>
+
+Phone Number
+
+</label>
+
+
+
+<div class="input-icon">
+
+
+<i class="fa-solid fa-phone"></i>
+
+
+<input
+
+type="text"
+
+name="phone"
+
+placeholder="01XXXXXXXX"
+
+
+required>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ROLE -->
+
+<div class="auth-form-group">
+
+
+<label>
+
+Register As
+
+</label>
+
+
+
+
+<div class="role-selector">
+
+
+
+
+
+<div class="role-option">
+
+
+<input
+
+type="radio"
+
+id="customerRole"
+
+name="role"
+
+value="customer"
+
+checked>
+
+
+
+<label for="customerRole">
+
+
+<i class="fa-solid fa-user"></i>
+
+
+<span>
+
+Customer
+
+</span>
+
+
+<small>
+
+Buy products
+
+</small>
+
+
+</label>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="role-option">
+
+
+<input
+
+type="radio"
+
+id="vendorRole"
+
+name="role"
+
+value="vendor">
+
+
+<label for="vendorRole">
+
+
+<i class="fa-solid fa-store"></i>
+
+
+<span>
+
+Vendor
+
+</span>
+
+
+<small>
+
+Sell products
+
+</small>
+
+
+</label>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PASSWORD -->
+
+<div class="auth-form-group">
+
+
+<label>
+
+Password
+
+</label>
+
+
+
+
+<div class="auth-password input-icon">
+
+
+<i class="fa-solid fa-lock"></i>
+
+
+
+<input
+
+type="password"
+
+name="password"
+
+placeholder="Minimum 8 characters"
+
+required>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="password-strength">
+
+
+<div class="password-strength-bar">
+
+
+<div class="password-strength-progress"></div>
+
+
+</div>
+
+
+
+<span class="password-strength-text">
+
+Password strength
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- CONFIRM PASSWORD -->
+
+
+<div class="auth-form-group">
+
+
+<label>
+
+Confirm Password
+
+</label>
+
+
+
+<div class="auth-password input-icon">
+
+
+<i class="fa-solid fa-lock"></i>
+
+
+
+<input
+
+type="password"
+
+name="confirm_password"
+
+placeholder="Repeat password"
+
+required>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- TERMS -->
+
+
+<div class="terms-check">
+
+
+<input
+
+type="checkbox"
+
+required>
+
+
+
+<span>
+
+I agree with HochipoHub Terms & Conditions
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- SUBMIT -->
+
+
+<button
+
+type="submit"
+
+class="auth-submit">
+
+
+<i class="fa-solid fa-user-plus"></i>
+
+
+Register
+
+
+</button>
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+<div class="auth-switch">
+
+
+Already have an account?
+
+
+<a onclick="switchToLogin()">
+
+Login here
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
 
 </div>
