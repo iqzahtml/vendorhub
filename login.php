@@ -125,9 +125,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet"
           href="css/login.css">
 
+    <link rel="stylesheet"
+            href="css/modal.css">
+
 </head>
 
 <body>
+    <div id="loginModel" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
 
 <div class="auth-page">
 
@@ -208,12 +214,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 Register here
 
             </a>
+        
 
         </div>
 
     </div>
 
 </div>
+
+<script src ="script.js"></script>
 
 </body>
 

@@ -78,5 +78,11 @@ function toggleMenu() {
         );
 
     }
+    
 
 }
+window.onload = function(){
+    document.getElementById("loginModel").style.display="block";
+
+}
+
