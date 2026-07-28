@@ -1,15 +1,77 @@
 <?php
+/* =====================================================
+   HOCHIPOHUB
+   database/db.php
+
+   Database Connection
+===================================================== */
+
+
 
 $host = "localhost";
-$user = "root";
+
+$username = "root";
+
 $password = "";
+
 $database = "hochipohub";
 
-$conn = mysqli_connect($host, $user, $password, $database);
 
-if (!$conn) {
-    die("Database Connection Failed : " . mysqli_connect_error());
+
+try{
+
+
+    $conn = new PDO(
+
+        "mysql:host=".$host.";dbname=".$database.";charset=utf8",
+
+        $username,
+
+        $password
+
+    );
+
+
+
+    // Error mode
+
+    $conn->setAttribute(
+
+        PDO::ATTR_ERRMODE,
+
+        PDO::ERRMODE_EXCEPTION
+
+    );
+
+
+
+    // Fetch mode
+
+    $conn->setAttribute(
+
+        PDO::ATTR_DEFAULT_FETCH_MODE,
+
+        PDO::FETCH_ASSOC
+
+    );
+
+
+
 }
 
-mysqli_set_charset($conn, "utf8");
+
+catch(PDOException $e){
+
+
+    die(
+
+        "Database Connection Failed: "
+        .$e->getMessage()
+
+    );
+
+
+}
+
+
 ?>
