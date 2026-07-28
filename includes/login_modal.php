@@ -1,68 +1,82 @@
 <div id="loginModal" class="modal">
 
-    <div class="modal-content">
+    <div class="modal-content login-container">
 
-        <button class="close" onclick="closeLoginModal()">
-            &times;
-        </button>
+        <span class="close" onclick="closeLogin()">&times;</span>
 
-        <div class="auth-logo">
-            Vendor<span>Hub</span>
+        <div class="login-left">
+
+            <img src="<?php echo BASE_URL; ?>images/logo.jpg" alt="Logo">
+
+            <h2>Welcome Back</h2>
+
+            <p>Login to continue shopping with HochipoHub.</p>
+
         </div>
 
-        <h2 class="modal-title">
-            Welcome Back
-        </h2>
+        <div class="login-right">
 
-        <p class="modal-subtitle">
-            Login to continue shopping
-        </p>
+            <h2>Login</h2>
 
-        <form action="login.php" method="POST">
+            <form action="<?php echo BASE_URL; ?>auth/login_process.php" method="POST">
 
-            <div class="form-group">
+                <div class="input-group">
 
-                <label>Email</label>
+                    <label>Email</label>
 
-                <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    placeholder="Enter your email"
-                    required>
+                    <input type="email" name="email" required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input type="password" name="password" required>
+
+                </div>
+
+                <div class="remember">
+
+                    <label>
+
+                        <input type="checkbox" name="remember">
+
+                        Remember Me
+
+                    </label>
+
+                </div>
+
+                <button type="submit" class="btn-login">
+
+                    Login
+
+                </button>
+
+            </form>
+
+            <div class="login-links">
+
+                <a href="<?php echo BASE_URL; ?>auth/forgot_password.php">
+
+                    Forgot Password?
+
+                </a>
 
             </div>
 
-            <div class="form-group">
+            <p>
 
-                <label>Password</label>
+                Don't have an account?
 
-                <input
-                    type="password"
-                    name="password"
-                    class="form-control"
-                    placeholder="Enter your password"
-                    required>
+                <a href="#" onclick="switchToRegister()">
 
-            </div>
+                    Register
 
-            <button
-                type="submit"
-                class="login-button">
+                </a>
 
-                Login
-
-            </button>
-
-        </form>
-
-        <div class="modal-register">
-
-            Don't have an account?
-
-            <a href="register.php">
-                Register Here
-            </a>
+            </p>
 
         </div>
 
