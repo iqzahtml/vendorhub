@@ -1,128 +1,175 @@
+<nav class="navbar">
+
+<div class="container">
+
+<div class="logo">
+
+<a href="<?php echo BASE_URL; ?>index.php">
+
+<img src="<?php echo BASE_URL; ?>images/logo.jpg" alt="HochipoHub">
+
+<span>HochipoHub</span>
+
+</a>
+
+</div>
+
+<ul class="menu">
+
+<li>
+
+<a href="<?php echo BASE_URL; ?>index.php">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a href="<?php echo BASE_URL; ?>catalog.php">
+
+Catalog
+
+</a>
+
+</li>
+
+<li>
+
+<a href="<?php echo BASE_URL; ?>category.php">
+
+Categories
+
+</a>
+
+</li>
+
+<li>
+
+<a href="<?php echo BASE_URL; ?>vendor.php">
+
+Vendors
+
+</a>
+
+</li>
+
+<li>
+
+<a href="<?php echo BASE_URL; ?>dashboard.php">
+
+Dashboard
+
+</a>
+
+</li>
+
+</ul>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search product...">
+
+<button>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+</div>
+
+<div class="nav-right">
+
+<a href="<?php echo BASE_URL; ?>cart.php">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+</a>
+
 <?php
 
-$currentPage = basename(
-    $_SERVER['PHP_SELF']
-);
+if(isset($_SESSION['user_id']))
+{
 
 ?>
 
-<nav class="navbar">
+<div class="dropdown">
 
-    <div class="nav-container">
+<button class="dropbtn">
 
-        <a href="index.php"
-           class="logo">
+<i class="fa-solid fa-user"></i>
 
-            Vendor<span>Hub</span>
+<?php echo $_SESSION['name']; ?>
 
-        </a>
+</button>
 
-        <div class="nav-links">
+<div class="dropdown-content">
 
-            <a href="index.php"
-               class="<?= $currentPage == 'index.php' ? 'active' : '' ?>">
+<a href="<?php echo BASE_URL; ?>profile.php">
 
-                Home
+Profile
 
-            </a>
+</a>
 
-            <a href="product.php"
-               class="<?= $currentPage == 'product.php' ? 'active' : '' ?>">
+<a href="<?php echo BASE_URL; ?>dashboard.php">
 
-                Products
+Dashboard
 
-            </a>
+</a>
 
-            <a href="category.php"
-               class="<?= $currentPage == 'category.php' ? 'active' : '' ?>">
+<a href="<?php echo BASE_URL; ?>auth/logout.php">
 
-                Categories
+Logout
 
-            </a>
+</a>
 
-            <a href="vendor.php"
-               class="<?= $currentPage == 'vendor.php' ? 'active' : '' ?>">
+</div>
 
-                Vendors
+</div>
 
-            </a>
+<?php
 
-            <?php if (isset($_SESSION['user_id'])): ?>
+}
 
-                <a href="cart.php"
-                   class="<?= $currentPage == 'cart.php' ? 'active' : '' ?>">
+else
 
-                    Cart
+{
 
-                </a>
+?>
 
-                <a href="order.php"
-                   class="<?= $currentPage == 'order.php' ? 'active' : '' ?>">
+<button class="login-btn" onclick="openLogin()">
 
-                    My Orders
+Login
 
-                </a>
+</button>
 
-                <div class="nav-user">
+<button class="register-btn" onclick="openRegister()">
 
-                    <span class="user-name">
+Register
 
-                        Hi,
-                        <?= htmlspecialchars(
-                            $_SESSION['name']
-                        ) ?>
+</button>
 
-                    </span>
+<?php
 
-                    <a href="profile.php">
+}
 
-                        Profile
+?>
 
-                    </a>
+</div>
 
-                    <a href="logout.php"
-                       class="btn btn-outline">
-
-                        Logout
-
-                    </a>
-
-                </div>
-
-            <?php else: ?>
-
-                <a href="#"
-                   class="btn btn-outline"
-                   onclick="openLoginModal(); return false;">
-
-                    Login
-
-                </a>
-
-                <a href="register.php"
-                   class="btn btn-primary">
-
-                    Register
-
-                </a>
-
-            <?php endif; ?>
-
-        </div>
-
-        <button class="menu-toggle"
-                onclick="toggleMenu()">
-
-            ☰
-
-        </button>
-
-    </div>
+</div>
 
 </nav>
 
-<?php if (!isset($_SESSION['user_id'])): ?>
+<?php
 
-    <?php include __DIR__ . "/login_modal.php"; ?>
+include "login_modal.php";
 
-<?php endif; ?>
+include "register_modal.php";
+
+?>
